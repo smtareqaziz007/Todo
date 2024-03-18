@@ -1,24 +1,12 @@
-import logo from './logo.svg';
-import './App.css';
+import "bootstrap/dist/css/bootstrap.css";
+import TodoCard from "./components/TodoCard";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <TodoCard title="Task 1" desc="hgdhvsdjhvjhvaJHXVSJHV"></TodoCard>
+      <TodoCard title="Task 2" desc="fbgkskacjkbascascsc snc nc snn"></TodoCard>
+    </>
   );
 }
 
