@@ -64,3 +64,24 @@ function TodoCard({ title, desc, priority, status }) {
 }
 
 export default TodoCard;
+
+
+
+
+
+
+
+{/* <>
+      <h1 style={{display:"flex" , justifyContent:"center"}} >My To-do List</h1>
+      <div style={{ display: "flex", flexDirection: "column" , gap: "20px", justifyContent: "center" }}>
+        {todoCards.map((todo, index) => (
+          <TodoCard
+          key={index} // Ensure each component has a unique key
+          title={todo.title}
+          desc={todo.desc}
+          priority={todo.priority}
+          status={todo.status}
+          />
+          ))}
+      </div>
+    </> */}

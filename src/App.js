@@ -1,47 +1,81 @@
 import "bootstrap/dist/css/bootstrap.css";
-import TodoCard from "./components/TodoCard";
+import { useState } from "react"
+import { uid } from "uid"
+import { NoteTable } from "./components/NoteTable"
+import { NoteForm } from "./components/NoteForm";
 
 
+const mockNotes = [
+  {
+    id: uid(),
+    title: "Note 1",
+    desc: "Note 1 description",
+    priority: 5,
+    status: "Pending",
+    createdAt: "2024-03-12T05:19:29.533Z",
+    updatedAt: "2024-03-12T05:19:29.533Z",
+  },
+  {
+    id: uid(),
+    title: "Note 1",
+    desc: "Note 1 description",
+    priority: 5,
+    status: "Pending",
+    createdAt: "2024-03-12T05:19:29.533Z",
+    updatedAt: "2024-03-12T05:19:29.533Z",
+  },
+  {
+    id: uid(),
+    title: "Note 2",
+    desc: "Note 2 description",
+    priority: 3,
+    status: "Pending",
+    createdAt: "2024-03-12T05:19:29.533Z",
+    updatedAt: "2024-03-12T05:19:29.533Z",
+  },
+  {
+    id: uid(),
+    title: "Note 3",
+    desc: "Note 3 description",
+    priority: 1,
+    status: "Pending",
+    createdAt: "2024-03-12T05:19:29.533Z",
+    updatedAt: "2024-03-12T05:19:29.533Z",
+  },
+]
 function App() {
-  // Array of objects representing props for TodoCard components
-  const todoCards = [
-    {
-      title: "Task 1",
-      desc: "This is task 1 description.",
-      priority: "High",
-      status: "Completed"
-    },
-    {
-      title: "Task 2",
-      desc: "This is task 2 description.",
-      priority: "Medium",
-      status: "In Progress"
-    },
-    {
-      title: "Task 3",
-      desc: "This is task 3 description.",
-      priority: "Low",
-      status: "Pending"
-    }
-  ];
+  const [notes, setNotes] = useState(mockNotes)
 
+  const addNote = (newNote) => {
+    setNotes([...notes, newNote])
+  }
+
+  const updateNote = (updatedNote) => {
+    const newNotes = notes.map((x) => {
+      if (x.id === updatedNote.id) {
+        x = updatedNote
+      }
+      return x
+    })
+
+    setNotes(newNotes)
+  }
+
+  const deleteNote = (id) => {
+    setNotes(
+      notes.filter((note) => {
+        return note.id !== id
+      })
+    )
+  }
   return (
     <>
-      <h1 style={{display:"flex" , justifyContent:"center"}} >My To-do List</h1>
-      <div style={{ display: "flex", flexDirection: "column" , gap: "20px", justifyContent: "center" }}>
-        {todoCards.map((todo, index) => (
-          <TodoCard
-          key={index} // Ensure each component has a unique key
-          title={todo.title}
-          desc={todo.desc}
-          priority={todo.priority}
-          status={todo.status}
-          />
-          ))}
-      </div>
+      <NoteForm submitNote={addNote} label={"Add Note"} />
+      <br />
+      <NoteTable notes={notes} updateNote={updateNote} deleteNote={deleteNote} />
     </>
-  );
+  )
 }
 
-export default App;
+export default App
 
