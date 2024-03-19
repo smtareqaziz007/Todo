@@ -1,6 +1,7 @@
 import "bootstrap/dist/css/bootstrap.css";
 import TodoCard from "./components/TodoCard";
 import { uid } from "uid";
+import { Button } from "react-bootstrap";
 
 function App() {
   const todoCards = [
@@ -29,9 +30,9 @@ function App() {
 
   return (
     <>
-      <h1 style={{ display: "flex", justifyContent: "center" }}>
+      {/* <h1 style={{ display: "flex", justifyContent: "center" }}>
         My To-do List
-      </h1>
+      </h1> */}
       <div
         style={{
           display: "flex",
@@ -40,6 +41,11 @@ function App() {
           justifyContent: "center",
         }}
       >
+        <div className="text-center mt-2">
+          <Button type="button" className="btn btn-primary btn-lg">
+            Add Task
+          </Button>
+        </div>
         {todoCards.map((todo) => (
           <TodoCard
             key={todo.id}
