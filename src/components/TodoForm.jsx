@@ -20,10 +20,8 @@ export const TodoForm = ({ submitNote, defaultNote, label }) => {
             id: uid(),
             title: "",
             desc: "",
-            priority: 3,
-            status: "Pending",
-            createdAt: new Date().toISOString(),
-            updatedAt: new Date().toISOString(),
+            priority: "High",
+            status: "Pending"
           }
     );
     setResetCounter(resetCounter + 1);
@@ -86,7 +84,7 @@ export const TodoForm = ({ submitNote, defaultNote, label }) => {
                 fieldName="priority"
                 defaultValue={note.priority}
                 onChange={onChangeHandler}
-                options={[1, 2, 3, 4, 5]}
+                options={["High" , "Medium" , "Low"]}
                 resetCounter={resetCounter}
               />
             </div>
