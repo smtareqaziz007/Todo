@@ -1,82 +1,27 @@
-import { Card, Container, Dropdown } from "react-bootstrap";
-import bgImage from "../assets/bgBlack.jpg";
+import React from "react";
+import { Card, Button } from "react-bootstrap";
+import { BsTrash } from 'react-icons/bs';
+import { TodoForm } from "./TodoForm";
 
-function TodoCard({ title, desc, priority, status }) {
+const TodoCard = ({ note, updateNote, deleteNote }) => {
   return (
-    <Container style={{ maxWidth: "600px", position: "relative" }}>
-      <Card
-        style={{
-          border: "3px solid black",
-          position: "relative",
-        }}
-      >
-        <Card.Header
-          style={{
-            backgroundImage: `url(${bgImage})`,
-            // backgroundColor: "lightskyblue",
-            color: "white",
-            display: "flex",
-            justifyContent: "space-between",
-          }}
-          onClick={(e) => e.stopPropagation()}
-        >
-          <h3>{title}</h3>
-          <Dropdown>
-            <Dropdown.Toggle variant="transparent" id="dropdown-basic">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="16"
-                height="16"
-                fill="white"
-                className="bi bi-three-dots"
-                viewBox="0 0 16 16"
-              >
-                <path d="M8 1.5a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3zm0 7a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3zm0 7a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z" />
-              </svg>
-            </Dropdown.Toggle>
-            <Dropdown.Menu>
-              <Dropdown.Item>Edit</Dropdown.Item>
-              <Dropdown.Item>Delete</Dropdown.Item>
-            </Dropdown.Menu>
-          </Dropdown>
-        </Card.Header>
-        <Card.Body>
-          <blockquote className="mb-0">
-            <p>{desc}</p>
-          </blockquote>
-          <div className="row">
-            <div className="col">
-              <strong>Priority:</strong> {priority}
-            </div>
-            <div className="col">
-              <strong>Status:</strong> {status}
-            </div>
+    <Card className="shadow-sm rounded">
+      <Card.Body>
+        <Card.Title className="fw-bold">{note.title}</Card.Title>
+        <Card.Text>{note.desc}</Card.Text>
+        <div className="d-flex justify-content-between align-items-center">
+          <div>
+            <span className={`badge bg-${note.priority === "High" ? "danger" : note.priority === "Low" ? "primary" : "warning"}`}>{note.priority}</span>
+            <span className={`badge bg-${note.status === "Done" ? "success" : note.status === "Failed" ? "danger" : "primary"} ms-2`}>{note.status}</span>
           </div>
-        </Card.Body>
-      </Card>
-    </Container>
+          <div>
+            <TodoForm submitNote={updateNote} defaultNote={note} label={"Update"} />
+            <Button className="btn btn-danger ms-2" onClick={() => deleteNote(note.id)}><BsTrash/></Button>
+          </div>
+        </div>
+      </Card.Body>
+    </Card>
   );
-}
+};
 
 export default TodoCard;
-
-
-
-
-
-
-
-{/* <>
-      <h1 style={{display:"flex" , justifyContent:"center"}} >My To-do List</h1>
-      <div style={{ display: "flex", flexDirection: "column" , gap: "20px", justifyContent: "center" }}>
-        {todoCards.map((todo, index) => (
-          <TodoCard
-          key={index} // Ensure each component has a unique key
-          title={todo.title}
-          desc={todo.desc}
-          priority={todo.priority}
-          status={todo.status}
-          />
-          ))}
-      </div>
-    </> */}
