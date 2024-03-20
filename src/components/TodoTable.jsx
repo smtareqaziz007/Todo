@@ -1,6 +1,8 @@
 import React from "react";
 import { TodoForm } from "./TodoForm";
 import { Card, Button } from "react-bootstrap";
+import { BsTrash } from 'react-icons/bs';
+
 
 const TodoCard = ({ note, updateNote, deleteNote }) => {
   return (
@@ -15,7 +17,7 @@ const TodoCard = ({ note, updateNote, deleteNote }) => {
           </div>
           <div>
             <TodoForm submitNote={updateNote} defaultNote={note} label={"Update"} />
-            <button className="btn btn-danger ms-2" onClick={() => deleteNote(note.id)}>Delete</button>
+            <Button className="btn btn-danger ms-2" onClick={() => deleteNote(note.id)}><BsTrash/></Button>
           </div>
         </div>
       </Card.Body>

@@ -3,6 +3,7 @@ import { uid } from "uid";
 import { Input } from "./Input";
 import { Select } from "./Select";
 import { Modal } from "./Modal";
+import { BsPencil } from 'react-icons/bs';
 
 export const TodoForm = ({ submitNote, defaultNote, label }) => {
   const [note, setNote] = useState({});
@@ -43,12 +44,16 @@ export const TodoForm = ({ submitNote, defaultNote, label }) => {
     setShowModal(false);
   };
 
-  const btnAdd = "btn btn-dark d-flex"
+  const btnAdd = "btn btn-dark d-flex justify-content-center align-items-center";
+  const btnUpdate = "btn btn-primary";
+  let btnStyle = "";
+
+  label === "+ Add Note" ? btnStyle = btnAdd : btnStyle = btnUpdate;
 
   return (
     <>
-      <button className="btn btn-primary" onClick={() => setShowModal(true)}>
-        {label}
+      <button className={btnStyle} onClick={() => setShowModal(true)}>
+        {label === "+ Add Note" ? label : <BsPencil/>}
       </button>
       <Modal showModal={showModal} onClose={() => setShowModal(false)}>
         <form>

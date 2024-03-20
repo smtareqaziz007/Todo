@@ -1,81 +1,53 @@
 import "bootstrap/dist/css/bootstrap.css";
-import { useState } from "react"
-import { uid } from "uid"
-import { TodoTable } from "./components/TodoTable"
+import { useState, useEffect } from "react";
+import { uid } from "uid";
+import { TodoTable } from "./components/TodoTable";
 import { TodoForm } from "./components/TodoForm";
 
-
-const mockNotes = [
-  {
-    id: uid(),
-    title: "Note 1",
-    desc: "Note 1 description",
-    priority: 5,
-    status: "Pending",
-    createdAt: "2024-03-12T05:19:29.533Z",
-    updatedAt: "2024-03-12T05:19:29.533Z",
-  },
-  {
-    id: uid(),
-    title: "Note 1",
-    desc: "Note 1 description",
-    priority: 5,
-    status: "Pending",
-    createdAt: "2024-03-12T05:19:29.533Z",
-    updatedAt: "2024-03-12T05:19:29.533Z",
-  },
-  {
-    id: uid(),
-    title: "Note 2",
-    desc: "Note 2 description",
-    priority: 3,
-    status: "Pending",
-    createdAt: "2024-03-12T05:19:29.533Z",
-    updatedAt: "2024-03-12T05:19:29.533Z",
-  },
-  {
-    id: uid(),
-    title: "Note 3",
-    desc: "Note 3 description",
-    priority: 1,
-    status: "Pending",
-    createdAt: "2024-03-12T05:19:29.533Z",
-    updatedAt: "2024-03-12T05:19:29.533Z",
-  },
-]
 function App() {
-  const [notes, setNotes] = useState(mockNotes)
+  const mockNotes = [
+    {
+      id: uid(),
+      title: "Note 1",
+      desc: "Note 1 description",
+      priority: 5,
+      status: "Pending",
+      createdAt: "2024-03-12T05:19:29.533Z",
+      updatedAt: "2024-03-12T05:19:29.533Z",
+    }
+  ]
+
+  const [notes, setNotes] = useState(() => {
+    // Retrieve notes from localStorage if they exist, or use mockNotes
+    const savedNotes = localStorage.getItem("notes");
+    return savedNotes ? JSON.parse(savedNotes) : mockNotes;
+  });
+
+  useEffect(() => {
+    // Update localStorage whenever notes change
+    localStorage.setItem("notes", JSON.stringify(notes));
+  }, [notes]);
 
   const addNote = (newNote) => {
-    setNotes([...notes, newNote])
-  }
+    setNotes([...notes, newNote]);
+  };
 
   const updateNote = (updatedNote) => {
-    const newNotes = notes.map((x) => {
-      if (x.id === updatedNote.id) {
-        x = updatedNote
-      }
-      return x
-    })
-
-    setNotes(newNotes)
-  }
+    const newNotes = notes.map((note) => (note.id === updatedNote.id ? updatedNote : note));
+    setNotes(newNotes);
+  };
 
   const deleteNote = (id) => {
-    setNotes(
-      notes.filter((note) => {
-        return note.id !== id
-      })
-    )
-  }
+    setNotes(notes.filter((note) => note.id !== id));
+  };
+
   return (
-    <>
-      <TodoForm submitNote={addNote} label={"Add Note"} />
+    <div className="container-xxl bd-gutter mt-3 my-md-4 bd-layout">
+      <TodoForm submitNote={addNote} label={"+ Add Note"} />
       <br />
       <TodoTable notes={notes} updateNote={updateNote} deleteNote={deleteNote} />
-    </>
-  )
+    </div>
+  );
 }
 
-export default App
-
+export default App;
