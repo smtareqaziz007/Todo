@@ -1,8 +1,8 @@
 import "bootstrap/dist/css/bootstrap.css";
 import { useState } from "react"
 import { uid } from "uid"
-import { NoteTable } from "./components/NoteTable"
-import { NoteForm } from "./components/NoteForm";
+import { TodoTable } from "./components/TodoTable"
+import { TodoForm } from "./components/TodoForm";
 
 
 const mockNotes = [
@@ -70,9 +70,9 @@ function App() {
   }
   return (
     <>
-      <NoteForm submitNote={addNote} label={"Add Note"} />
+      <TodoForm submitNote={addNote} label={"Add Note"} />
       <br />
-      <NoteTable notes={notes} updateNote={updateNote} deleteNote={deleteNote} />
+      <TodoTable notes={notes} updateNote={updateNote} deleteNote={deleteNote} />
     </>
   )
 }
