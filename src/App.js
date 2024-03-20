@@ -18,13 +18,11 @@ function App() {
   ]
 
   const [notes, setNotes] = useState(() => {
-    // Retrieve notes from localStorage if they exist, or use mockNotes
     const savedNotes = localStorage.getItem("notes");
     return savedNotes ? JSON.parse(savedNotes) : mockNotes;
   });
 
   useEffect(() => {
-    // Update localStorage whenever notes change
     localStorage.setItem("notes", JSON.stringify(notes));
   }, [notes]);
 

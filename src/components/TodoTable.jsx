@@ -1,8 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { TodoForm } from "./TodoForm";
-import { Card, Button } from "react-bootstrap";
+import { Card, Button, Form } from "react-bootstrap";
 import { BsTrash } from 'react-icons/bs';
-
 
 const TodoCard = ({ note, updateNote, deleteNote }) => {
   return (
@@ -26,10 +25,25 @@ const TodoCard = ({ note, updateNote, deleteNote }) => {
 };
 
 export const TodoTable = ({ notes, updateNote, deleteNote }) => {
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const filteredNotes = notes.filter(note =>
+    note.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    note.desc.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   return (
     <div className="container mt-4">
+      <Form className="mb-4">
+        <Form.Control
+          type="text"
+          placeholder="Search..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
+      </Form>
       <div className="row">
-        {notes.map((note, i) => (
+        {filteredNotes.map((note, i) => (
           <div key={i} className="col-md-6 mb-4">
             <TodoCard note={note} updateNote={updateNote} deleteNote={deleteNote} />
           </div>
