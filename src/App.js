@@ -1,25 +1,25 @@
 import "bootstrap/dist/css/bootstrap.css";
 import { useState, useEffect } from "react";
-import { uid } from "uid";
+// import { uid } from "uid";
 import { TodoTable } from "./components/TodoTable";
 import { TodoForm } from "./components/TodoForm";
 
 function App() {
-  const mockNotes = [
-    {
-      id: uid(),
-      title: "Note 1",
-      desc: "Note 1 description",
-      priority: 5,
-      status: "Pending",
-      createdAt: "2024-03-12T05:19:29.533Z",
-      updatedAt: "2024-03-12T05:19:29.533Z",
-    }
-  ]
+  // const mockNotes = [
+  //   {
+  //     id: uid(),
+  //     title: "Note 1",
+  //     desc: "Note 1 description",
+  //     priority: 5,
+  //     status: "Pending",
+  //     createdAt: "2024-03-12T05:19:29.533Z",
+  //     updatedAt: "2024-03-12T05:19:29.533Z",
+  //   }
+  // ]
 
   const [notes, setNotes] = useState(() => {
     const savedNotes = localStorage.getItem("notes");
-    return savedNotes ? JSON.parse(savedNotes) : mockNotes;
+    return savedNotes ? JSON.parse(savedNotes) : [];
   });
 
   useEffect(() => {
