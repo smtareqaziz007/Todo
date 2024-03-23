@@ -11,7 +11,7 @@ export const Input = ({ label, fieldName, onChangeHandler, defaultValue, type = 
 
   return (
     <div>
-      <label htmlFor={fieldName}>{label}:</label>
+      <label htmlFor={fieldName}>{label}</label>
       <input ref={input} type={type} id={fieldName} name={fieldName} onChange={onChangeHandler} />
     </div>
   )
