@@ -1,28 +1,20 @@
-import { createPortal } from "react-dom";
+import React from "react";
+import { Modal as BootstrapModal } from "react-bootstrap";
 
 export const Modal = ({ onClose, showModal, children }) => {
   return (
     <>
-      {showModal &&
-        createPortal(
-          <>
-            <div className="modal-backdrop fade show"></div>
-            <div className="modal fade show" style={{ display: "block" }} tabIndex="-1" aria-hidden="true">
-              <div className="modal-dialog modal-dialog-centered" style={{ minWidth: "300px", maxWidth: "600px" }}>
-                <div className="modal-content" style={{ minHeight: "300px" }}>
-                  <div className="modal-header bg-primary text-white d-flex justify-content-between align-items-center">
-                    <h3 className="mb-0">Todo</h3>
-                    <button type="button" className="btn-close" aria-label="Close" onClick={onClose}></button>
-                  </div>
-                  <div className="modal-body">
-                    {children}
-                  </div>
-                </div>
-              </div>
-            </div>
-          </>,
-          document.body
-        )}
+    { showModal && 
+
+      <BootstrapModal show={showModal} onHide={onClose} centered>
+        <BootstrapModal.Header closeButton className="bg-primary text-white d-flex justify-content-between align-items-center">
+          <BootstrapModal.Title>Todo</BootstrapModal.Title>
+        </BootstrapModal.Header>
+        <BootstrapModal.Body>
+          {children}
+        </BootstrapModal.Body>
+      </BootstrapModal>
+      }
     </>
   );
 };

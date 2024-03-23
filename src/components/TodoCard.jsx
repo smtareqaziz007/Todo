@@ -8,7 +8,7 @@ const TodoCard = ({ note, updateNote, deleteNote }) => {
 
   const handleDelete = () => {
     deleteNote(note.id);
-    setShowModal(false); // Close the modal after deletion
+    setShowModal(false);
   };
 
   return (
