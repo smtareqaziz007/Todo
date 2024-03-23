@@ -13,6 +13,7 @@ export const TodoForm = ({ submitNote, defaultNote, label }) => {
   useEffect(() => reset(), []);
 
   const reset = () => {
+    // console.log(`default note : ${defaultNote}`)
     setNote(
       defaultNote
         ? defaultNote
@@ -37,6 +38,10 @@ export const TodoForm = ({ submitNote, defaultNote, label }) => {
 
   const submit = (e) => {
     e.preventDefault();
+    // if (!note.title || !note.desc) {
+    //   alert("Please fill in all fields");
+    //   return;
+    // }
     submitNote(note);
     reset();
     setShowModal(false);
@@ -50,7 +55,7 @@ export const TodoForm = ({ submitNote, defaultNote, label }) => {
 
   return (
     <>
-      <button className={btnStyle} onClick={() => setShowModal(true)}>
+      <button className={btnStyle} onClick={() => {setShowModal(true);reset()}}>
         {label === "+ Add Note" ? label : <BsPencil/>}
       </button>
       <Modal showModal={showModal} onClose={() => setShowModal(false)}>

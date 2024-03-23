@@ -4,7 +4,7 @@ export const Input = ({ label, fieldName, onChangeHandler, defaultValue, type = 
   const input = useRef(null)
   useEffect(() => {
     if (input && input.current) {
-      console.log(input.current.value)
+      // console.log(input.current.value)
       input.current.value = defaultValue ? defaultValue : ""
     }
   }, [resetCounter])

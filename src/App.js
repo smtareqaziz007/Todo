@@ -28,11 +28,14 @@ function App() {
 
   const addNote = (newNote) => {
     setNotes([...notes, newNote]);
+    console.log(notes)
   };
 
   const updateNote = (updatedNote) => {
+    console.log(updatedNote)
     const newNotes = notes.map((note) => (note.id === updatedNote.id ? updatedNote : note));
     setNotes(newNotes);
+    console.log(notes)
   };
 
   const deleteNote = (id) => {
